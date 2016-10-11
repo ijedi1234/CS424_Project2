@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+    <title>D3 tutorial</title>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <!--<script src="d3.min.js"></script>-->
+</head> 
+<body>
+    <script>
+        var vis = d3.select("body").append("svg")
+        var pi = Math.PI;
+        var length = 2;
+        var padding = 10;
+        var innerRad = 100;
+        var outerRad = 240;
+        var tabIn = 50;
+        var tabOut = 80;
+        for (var i = 0; i < length; i++) {
+            var arc = d3.svg.arc()
+            .innerRadius(innerRad)
+            .outerRadius(outerRad)
+            .startAngle((i * 360 / length + padding) * (pi / 180)) //converting from degs to radians
+            .endAngle(((i + 1) * 360 / length - padding) * (pi / 180)) //just radians
+
+            vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+            .append("path")
+            .attr("d", arc)
+            .attr("fill", "rgb(253,253,150)")
+            .attr("transform", "translate(400, 400)");
+        }
+        for (var i = 0; i < length; i++) {
+            var arc = d3.svg.arc()
+            .innerRadius(0)
+            .outerRadius(outerRad)
+            .startAngle((i * 360 / length - padding) * (pi / 180)) //converting from degs to radians
+            .endAngle((i * 360 / length + padding) * (pi / 180)) //just radians
+
+            vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+            .append("path")
+            .attr("d", arc)
+            .attr("fill", "rgb(255,179,71)")
+            .attr("transform", "translate(400, 400)");
+        }
+        var center = d3.svg.arc()
+        .innerRadius(0)
+        .outerRadius(innerRad)
+        .startAngle(0) //converting from degs to radians
+        .endAngle(2 * pi) //just radians
+
+        vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+        .append("path")
+        .attr("d", center)
+        .attr("fill", "rgb(255,105,97)")
+        .attr("transform", "translate(400, 400)");
+        for (var i = 0; i < length; i++) {
+            var arcRangeStart = (i * 360 / length + padding) * (pi / 180);
+            var arcRangeEnd = ((i + 1) * 360 / length - padding) * (pi / 180);
+            var trisectRange = (arcRangeEnd - arcRangeStart) / 3 * (180 / pi);
+            var nestPadding = 3;
+            for (var j = 0; j < 1; j++) {
+                var arc = d3.svg.arc()
+                .innerRadius(outerRad - tabIn)
+                .outerRadius(outerRad + tabOut)
+                .startAngle(arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180)) //converting from degs to radians
+                .endAngle(arcRangeStart + ((j + 1) * trisectRange - nestPadding) * (pi / 180)) //just radians
+
+                vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+                .append("path")
+                .attr("d", arc)
+                .attr("fill", "rgb(177,156,217)")
+                .attr("transform", "translate(400, 400)");
+            }
+            for (var j = 1; j < 2; j++) {
+                var arc = d3.svg.arc()
+                .innerRadius(outerRad - tabIn)
+                .outerRadius(outerRad + tabOut)
+                .startAngle(arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180)) //converting from degs to radians
+                .endAngle(arcRangeStart + ((j + 1) * trisectRange - nestPadding) * (pi / 180)) //just radians
+
+                vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+                .append("path")
+                .attr("d", arc)
+                .attr("fill", "rgb(174,198,207)")
+                .attr("transform", "translate(400, 400)");
+            }
+            for (var j = 2; j < 3; j++) {
+                var arc = d3.svg.arc()
+                .innerRadius(outerRad - tabIn)
+                .outerRadius(outerRad + tabOut)
+                .startAngle(arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180)) //converting from degs to radians
+                .endAngle(arcRangeStart + ((j + 1) * trisectRange - nestPadding) * (pi / 180)) //just radians
+
+                vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+                .append("path")
+                .attr("d", arc)
+                .attr("fill", "rgb(119,221,119)")
+                .attr("transform", "translate(400, 400)");
+            }
+        }
+    </script>
+</body> 
+</html>
