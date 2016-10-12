@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>D3 tutorial</title>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
     <!--<script src="d3.min.js"></script>-->
 </head> 
 <body>
@@ -16,7 +16,7 @@
         var tabIn = 50;
         var tabOut = 80;
         for (var i = 0; i < length; i++) {
-            var arc = d3.svg.arc()
+            var arc = d3.arc()
             .innerRadius(innerRad)
             .outerRadius(outerRad)
             .startAngle((i * 360 / length + padding) * (pi / 180)) //converting from degs to radians
@@ -29,7 +29,7 @@
             .attr("transform", "translate(400, 400)");
         }
         for (var i = 0; i < length; i++) {
-            var arc = d3.svg.arc()
+            var arc = d3.arc()
             .innerRadius(0)
             .outerRadius(outerRad)
             .startAngle((i * 360 / length - padding) * (pi / 180)) //converting from degs to radians
@@ -41,7 +41,7 @@
             .attr("fill", "rgb(255,179,71)")
             .attr("transform", "translate(400, 400)");
         }
-        var center = d3.svg.arc()
+        var center = d3.arc()
         .innerRadius(0)
         .outerRadius(innerRad)
         .startAngle(0) //converting from degs to radians
@@ -58,7 +58,7 @@
             var trisectRange = (arcRangeEnd - arcRangeStart) / 3 * (180 / pi);
             var nestPadding = 3;
             for (var j = 0; j < 1; j++) {
-                var arc = d3.svg.arc()
+                var arc = d3.arc()
                 .innerRadius(outerRad - tabIn)
                 .outerRadius(outerRad + tabOut)
                 .startAngle(arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180)) //converting from degs to radians
@@ -71,7 +71,7 @@
                 .attr("transform", "translate(400, 400)");
             }
             for (var j = 1; j < 2; j++) {
-                var arc = d3.svg.arc()
+                var arc = d3.arc()
                 .innerRadius(outerRad - tabIn)
                 .outerRadius(outerRad + tabOut)
                 .startAngle(arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180)) //converting from degs to radians
@@ -84,7 +84,7 @@
                 .attr("transform", "translate(400, 400)");
             }
             for (var j = 2; j < 3; j++) {
-                var arc = d3.svg.arc()
+                var arc = d3.arc()
                 .innerRadius(outerRad - tabIn)
                 .outerRadius(outerRad + tabOut)
                 .startAngle(arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180)) //converting from degs to radians
