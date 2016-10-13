@@ -9,7 +9,7 @@
     <script>
         var vis = d3.select("body").append("svg")
         var pi = Math.PI;
-        var length = 2;
+        var length = 4;
         var padding = 10;
         var innerRad = 100;
         var outerRad = 240;
@@ -41,6 +41,20 @@
             .attr("fill", "rgb(255,179,71)")
             .attr("transform", "translate(400, 400)");
         }
+        for (var i = 0; i < length; i++) {
+
+	    var angle = ((i + 0.5) * 360 / length) * (pi / 180);
+
+	    //var angleDiff = ((i * 360 / length + padding) * (pi / 180) - ((i + 1) * 360 / length - padding) * (pi / 180)) / 2;
+	    var radius = ((outerRad - tabIn) - innerRad) / 2 + innerRad;
+	    var transX = 400 + (radius * Math.cos(angle));
+	    var transY = 400 + (radius * Math.sin(angle));
+
+            vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+	    .append("text")
+	    .attr("transform", "translate(" + transX + "," + transY + ")")
+	    .text("" + i);
+        }
         var center = d3.arc()
         .innerRadius(0)
         .outerRadius(innerRad)
@@ -52,6 +66,11 @@
         .attr("d", center)
         .attr("fill", "rgb(255,105,97)")
         .attr("transform", "translate(400, 400)");
+
+        vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+	.append("text")
+	.attr("transform", "translate(370,400)")
+	.text("Star");
         for (var i = 0; i < length; i++) {
             var arcRangeStart = (i * 360 / length + padding) * (pi / 180);
             var arcRangeEnd = ((i + 1) * 360 / length - padding) * (pi / 180);
@@ -69,6 +88,26 @@
                 .attr("d", arc)
                 .attr("fill", "rgb(177,156,217)")
                 .attr("transform", "translate(400, 400)");
+
+		var bisectRange = ((((j + 1) * trisectRange - nestPadding) * (pi / 180)) - ((j * trisectRange + nestPadding) * (pi / 180))) / 2;
+	
+		var angle = arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180) - pi/2 + bisectRange;
+
+		var transX1 = (400 + ((outerRad - tabIn) * Math.cos(angle) ) )
+		var transY1 = (400 + ((outerRad - tabIn) * Math.sin(angle) ) )
+		var transX2 = (400 + ((outerRad + tabOut) * Math.cos(angle) ) )
+		var transY2 = (400 + ((outerRad + tabOut) * Math.sin(angle) ) )
+
+		if((angle * (180/pi)) % 360 > 270 || (angle * (180/pi)) % 360 <= 90)
+            		vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+	    		.append("text")
+	    		.attr("transform", "translate(" + transX1 + "," + transY1 + ") rotate(" + (angle * (180/pi)) + ")")
+	    		.text("Purple");
+		else
+            		vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+	    		.append("text")
+	    		.attr("transform", "translate(" + transX2 + "," + transY2 + ") rotate(" + (angle * (180/pi) + 180) + ")")
+	    		.text("Purple");
             }
             for (var j = 1; j < 2; j++) {
                 var arc = d3.arc()
@@ -82,6 +121,26 @@
                 .attr("d", arc)
                 .attr("fill", "rgb(174,198,207)")
                 .attr("transform", "translate(400, 400)");
+
+		var bisectRange = ((((j + 1) * trisectRange - nestPadding) * (pi / 180)) - ((j * trisectRange + nestPadding) * (pi / 180))) / 2;
+	
+		var angle = arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180) - pi/2 + bisectRange;
+
+		var transX1 = (400 + ((outerRad - tabIn) * Math.cos(angle) ) )
+		var transY1 = (400 + ((outerRad - tabIn) * Math.sin(angle) ) )
+		var transX2 = (400 + ((outerRad + tabOut) * Math.cos(angle) ) )
+		var transY2 = (400 + ((outerRad + tabOut) * Math.sin(angle) ) )
+
+		if((angle * (180/pi)) % 360 > 270 || (angle * (180/pi)) % 360 <= 90)
+            		vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+	    		.append("text")
+	    		.attr("transform", "translate(" + transX1 + "," + transY1 + ") rotate(" + (angle * (180/pi)) + ")")
+	    		.text("Blue");
+		else
+            		vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+	    		.append("text")
+	    		.attr("transform", "translate(" + transX2 + "," + transY2 + ") rotate(" + (angle * (180/pi) + 180) + ")")
+	    		.text("Blue");
             }
             for (var j = 2; j < 3; j++) {
                 var arc = d3.arc()
@@ -95,6 +154,26 @@
                 .attr("d", arc)
                 .attr("fill", "rgb(119,221,119)")
                 .attr("transform", "translate(400, 400)");
+
+		var bisectRange = ((((j + 1) * trisectRange - nestPadding) * (pi / 180)) - ((j * trisectRange + nestPadding) * (pi / 180))) / 2;
+	
+		var angle = arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180) - pi/2 + bisectRange;
+
+		var transX1 = (400 + ((outerRad - tabIn) * Math.cos(angle) ) )
+		var transY1 = (400 + ((outerRad - tabIn) * Math.sin(angle) ) )
+		var transX2 = (400 + ((outerRad + tabOut) * Math.cos(angle) ) )
+		var transY2 = (400 + ((outerRad + tabOut) * Math.sin(angle) ) )
+
+		if((angle * (180/pi)) % 360 > 270 || (angle * (180/pi)) % 360 <= 90)
+            		vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+	    		.append("text")
+	    		.attr("transform", "translate(" + transX1 + "," + transY1 + ") rotate(" + (angle * (180/pi)) + ")")
+	    		.text("Green");
+		else
+            		vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+	    		.append("text")
+	    		.attr("transform", "translate(" + transX2 + "," + transY2 + ") rotate(" + (angle * (180/pi) + 180) + ")")
+	    		.text("Green");
             }
         }
     </script>
