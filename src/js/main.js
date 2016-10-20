@@ -92,9 +92,110 @@ var App = App || {};
   function useData() {
     var loadEndTime = new Date().getTime();
     console.log("Data Load Time:", (loadEndTime - loadStartTime)/1000, "seconds");
-    drawPie(App.exoplanetData["BD-06 1339"], "BD-06 1339", "#pieDiv2");
+
+		setupDivs();
+    // drawPie(App.exoplanetData["BD-06 1339"], "BD-06 1339", "#starPlanetPies");
 
 
   }
+
+	function setupDivs() {
+		let IDs = ["#starOverview", "#starInfo", "#starPlanetPies", "#planetInfo"];
+		let padding = 5;
+
+		let width, height;
+		let item;
+
+		// set up starOverview panel
+		width = d3.select("#starOverview").node().clientWidth;
+		height = d3.select("#starOverview").node().clientHeight;
+
+		item = d3.select("#starOverview")
+		.append("svg")
+			.attr("id", "starOverviewSVG")
+			.attr("width", width)
+			.attr("height", height);
+
+		App.starOverview = {
+			svg: item,
+			width: width,
+			height: height
+		};
+
+		App.starOverview.svg.append("rect")
+			.attr("width", "100%")
+			.attr("height", "100%")
+			.style("fill", "#2b4a7c");
+
+		d3.select("#starOverview")
+		.append("div")
+			.attr("id", "smallMap");
+
+		// set up starInfo panel
+		width = d3.select("#starInfo").node().clientWidth;
+		height = d3.select("#starInfo").node().clientHeight;
+
+		item = d3.select("#starInfo")
+		.append("svg")
+			.attr("id", "starInfoSVG")
+			.attr("width", width)
+			.attr("height", height);
+
+		App.starInfo = {
+			svg: item,
+			width: width,
+			height: height
+		};
+
+		App.starInfo.svg.append("rect")
+			.attr("width", "100%")
+			.attr("height", "100%")
+			.style("fill", "#2b4a7c");
+
+		// set up starPlanet panel
+		width = d3.select("#starPlanet").node().clientWidth;
+		height = d3.select("#starPlanet").node().clientHeight;
+
+		item = d3.select("#starPlanet")
+		.append("svg")
+			.attr("id", "starPlanetSVG")
+			.attr("width", width)
+			.attr("height", height);
+
+		App.starPlanet = {
+			svg: item,
+			width: width,
+			height: height
+		};
+
+		App.starPlanet.svg.append("rect")
+			.attr("width", "100%")
+			.attr("height", "100%")
+			.style("fill", "#2b4a7c");
+
+		// set up planetInfo panel
+		width = d3.select("#planetInfo").node().clientWidth;
+		height = d3.select("#planetInfo").node().clientHeight;
+
+		item = d3.select("#planetInfo")
+		.append("svg")
+			.attr("id", "planetInfoSVG")
+			.attr("width", width)
+			.attr("height", height);
+
+		App.planetInfo = {
+			svg: item,
+			width: width,
+			height: height
+		};
+
+		App.planetInfo.svg.append("rect")
+			.attr("width", "100%")
+			.attr("height", "100%")
+			.style("fill", "#2b4a7c");
+
+		console.log(App);
+	}
+
 
 })();
