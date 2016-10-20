@@ -94,7 +94,7 @@ var App = App || {};
     console.log("Data Load Time:", (loadEndTime - loadStartTime)/1000, "seconds");
 
 		setupDivs();
-    // drawPie(App.exoplanetData["BD-06 1339"], "BD-06 1339", "#starPlanetPies");
+    drawPie(App.exoplanetData["BD-06 1339"], "BD-06 1339", App.starPlanet.svg);
 
 
   }
