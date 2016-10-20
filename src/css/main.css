@@ -23,15 +23,26 @@ html, body, .fluidContainer{
 }
 
 .inner {
-	border: 1px solid #000;
+	/*border: 1px solid #000;*/
 	height: 100%;
 }
 
 #smallMap {
 	border: 1px solid #FFF;
+	background: black;
 	position: absolute;
+	overflow:hidden;
 	top: 10px;
 	right: 10px;
 	width: 120px;
 	height: 72px;
+}
+
+#smallMapLoc {
+	border: 1px solid #FF0;
+	position: absolute;
+	top: 18px;
+	left: 30px;
+	width: 60px;
+	height: 36px;
 }

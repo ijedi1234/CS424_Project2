@@ -24,9 +24,6 @@ function drawPie(starInfo, name, target) {
 		y: (d3.min([width, height]) / 2)
 	};
 
-		console.log(width, height);
-		console.log(center);
-
 	// vis = vis.append("svg").attr("width", "1200").attr("height", "800"); // Added height and width so arc is visible
         var pi = Math.PI;
         var length = starInfo.planets.length;
