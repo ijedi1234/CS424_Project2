@@ -173,9 +173,25 @@
             		vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
 	    		.append("text")
 	    		.attr("transform", "translate(" + transX2 + "," + transY2 + ") rotate(" + (angle * (180/pi) + 180) + ")")
-	    		.text("Green");
+	    		.text("Green").attr("fill", "yellow");
             }
         }
+        var center = d3.arc()
+        .innerRadius(0)
+        .outerRadius(innerRad)
+        .startAngle(0) //converting from degs to radians
+        .endAngle(2 * pi) //just radians
+
+        vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+        .append("path")
+        .attr("d", center)
+        .attr("fill", "rgb(255,105,97)")
+        .attr("transform", "translate(" + (400 + outerRad + tabOut + innerRad + 10) + ", " + (400 + outerRad + tabOut - innerRad) + ")");
+
+        vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
+	.append("text")
+	.attr("transform", "translate(" + (370 + outerRad + tabOut + innerRad + 10) + ", " + (400 + outerRad + tabOut - innerRad) + ")")
+	.text("Star").attr("color","yellow");
     </script>
 </body> 
 </html>

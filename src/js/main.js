@@ -109,8 +109,17 @@ var App = App || {};
     var loadEndTime = new Date().getTime();
     console.log("Data Load Time:", (loadEndTime - loadStartTime)/1000, "seconds");
 
-		setupDivs();
-    drawPie(App.exoplanetData["BD-06 1339"], "BD-06 1339", App.starPlanet.svg);
+    setupDivs();
+    drawExpandedPie(App.exoplanetData["BD-06 1339"], "BD-06 1339", App.starPlanet.svg);
+    drawUnexpandedPie(App.exoplanetData["55 Cnc"], "55 Cnc", App.starPlanet.svg, 0);
+    drawUnexpandedPie(App.exoplanetData["55 Cnc"], "55 Cnc", App.starPlanet.svg, 1);
+    drawUnexpandedPie(App.exoplanetData["55 Cnc"], "55 Cnc", App.starPlanet.svg, 2);
+    drawUnexpandedPie(App.exoplanetData["55 Cnc"], "55 Cnc", App.starPlanet.svg, 3);
+    drawUnexpandedPie(App.exoplanetData["55 Cnc"], "55 Cnc", App.starPlanet.svg, 4);
+    drawUnexpandedPie(App.exoplanetData["55 Cnc"], "55 Cnc", App.starPlanet.svg, 5);
+    drawUnexpandedPie(App.exoplanetData["55 Cnc"], "55 Cnc", App.starPlanet.svg, 6);
+    drawUnexpandedPie(App.exoplanetData["55 Cnc"], "55 Cnc", App.starPlanet.svg, 7);
+    drawUnexpandedPie(App.exoplanetData["55 Cnc"], "55 Cnc", App.starPlanet.svg, 8);
 
 		App.updateThumb(0, 0, 1);
 		drawStars();
