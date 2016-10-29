@@ -4,7 +4,7 @@
     <title>D3 tutorial</title>
     <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
     <!--<script src="d3.min.js"></script>-->
-</head> 
+</head>
 <body>
     <script>
         var vis = d3.select("body").append("svg")
@@ -90,7 +90,7 @@
                 .attr("transform", "translate(400, 400)");
 
 		var bisectRange = ((((j + 1) * trisectRange - nestPadding) * (pi / 180)) - ((j * trisectRange + nestPadding) * (pi / 180))) / 2;
-	
+
 		var angle = arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180) - pi/2 + bisectRange;
 
 		var transX1 = (400 + ((outerRad - tabIn) * Math.cos(angle) ) )
@@ -123,7 +123,7 @@
                 .attr("transform", "translate(400, 400)");
 
 		var bisectRange = ((((j + 1) * trisectRange - nestPadding) * (pi / 180)) - ((j * trisectRange + nestPadding) * (pi / 180))) / 2;
-	
+
 		var angle = arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180) - pi/2 + bisectRange;
 
 		var transX1 = (400 + ((outerRad - tabIn) * Math.cos(angle) ) )
@@ -156,7 +156,7 @@
                 .attr("transform", "translate(400, 400)");
 
 		var bisectRange = ((((j + 1) * trisectRange - nestPadding) * (pi / 180)) - ((j * trisectRange + nestPadding) * (pi / 180))) / 2;
-	
+
 		var angle = arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180) - pi/2 + bisectRange;
 
 		var transX1 = (400 + ((outerRad - tabIn) * Math.cos(angle) ) )
@@ -173,7 +173,7 @@
             		vis.attr("width", "800").attr("height", "800") // Added height and width so arc is visible
 	    		.append("text")
 	    		.attr("transform", "translate(" + transX2 + "," + transY2 + ") rotate(" + (angle * (180/pi) + 180) + ")")
-	    		.text("Green").attr("fill", "yellow");
+          .text("Green").attr("fill", "yellow");
             }
         }
         var center = d3.arc()
@@ -193,5 +193,5 @@
 	.attr("transform", "translate(" + (370 + outerRad + tabOut + innerRad + 10) + ", " + (400 + outerRad + tabOut - innerRad) + ")")
 	.text("Star").attr("color","yellow");
     </script>
-</body> 
+</body>
 </html>

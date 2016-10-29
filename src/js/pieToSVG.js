@@ -6,7 +6,9 @@ var tabTypes = {
     ]
 };
 
-function drawUnexpandedPie(starInfo, name, target, position) {
+var legendDrawn = 0;
+
+function drawUnexpandedPie(starInfo, name, target, position, expandFlag) {
     var vis;
 
     // add pie to target if it exists
@@ -48,19 +50,44 @@ function drawUnexpandedPie(starInfo, name, target, position) {
     .startAngle(0) //converting from degs to radians
     .endAngle(2 * pi) //just radians
 
-    vis
+    /*vis
     .append("path")
-    .attr("d", center).attr("data-star", name).attr("id", "pieStarUnselected").attr("onclick", "selectPieStar(this)")
+    .attr("d", center).attr("data-star", name).attr("id", "pieStarUnselected")//.attr("onclick", "selectPieStar(this)")
     .attr("fill", "rgb(255,105,97)")
-            .attr("transform", "translate(" + (unexpandedPieCenter.x) + ", " + (unexpandedPieCenter.y) + ")");
+            .attr("transform", "translate(" + (unexpandedPieCenter.x) + ", " + (unexpandedPieCenter.y) + ")");*/
 
+    if(expandFlag == 0){
+      vis
+      .append("path")
+      .attr("d", center).attr("data-star", name).attr("id", "pieStarUnselected")//.attr("onclick", "selectPieStar(this)")
+      .attr("fill", "rgb(255,105,97)")
+              .attr("transform", "translate(" + (unexpandedPieCenter.x) + ", " + (unexpandedPieCenter.y) + ")");
+    }
+    else{
+      vis.selectAll("#pieStarUnselected").attr("fill", "rgb(255,105,97)");
+
+      vis
+      .append("path")
+      .attr("d", center).attr("data-star", name).attr("id", "pieStarUnselected")//.attr("onclick", "selectPieStar(this)")
+      .attr("fill", "grey")
+              .attr("transform", "translate(" + (unexpandedPieCenter.x) + ", " + (unexpandedPieCenter.y) + ")");
+    }
     var cutName = name.substring(0, 10);
 
     vis
-.append("text").attr("data-star", name).attr("id", "pieStarUnselected").attr("onclick", "selectPieStar(this)")
+.append("text").attr("data-star", name).attr("id", "pieStarUnselectedText")//.attr("onclick", "selectPieStar(this)")
 .attr("transform", "translate(" + (unexpandedPieCenter.x) + ", " + (5 + unexpandedPieCenter.y) + ")")
 .style("text-anchor", "middle")
 .text(cutName);
+
+    vis.selectAll("#pieStarUnselected")
+      .on("click", function(d,i){
+        selectPieStar(this);
+        vis.selectAll("#pieStarUnselected").attr("fill", "rgb(255,105,97)");
+        d3.select(this)
+          .attr("fill", "grey");
+        expandedStar = selectedStars[this.getAttribute("data-star")];
+      })
 }
 
 function drawExpandedPie(starInfo, name, target) {
@@ -106,6 +133,8 @@ function drawExpandedPie(starInfo, name, target) {
         .attr("d", arc)
         .attr("fill", "rgb(253,253,150)").attr("data-star", name).attr("id", "pieStarSelected")
                     .attr("transform", "translate(" + (pieCenter.x) + ", " + (pieCenter.y) + ")");
+
+
     }
     for (var i = 0; i < length; i++) {
         var arc = d3.arc()
@@ -142,7 +171,7 @@ function drawExpandedPie(starInfo, name, target) {
     .endAngle(2 * pi) //just radians
 
     vis
-    .append("path").attr("data-star", name).attr("id", "pieStarSelected")
+    .append("path").attr("data-star", name).attr("id", "pieStarSelectedMiddle")
     .attr("d", center)
     .attr("fill", "rgb(255,105,97)")
             .attr("transform", "translate(" + (pieCenter.x) + ", " + (pieCenter.y) + ")");
@@ -242,6 +271,7 @@ function drawExpandedPie(starInfo, name, target) {
         }
         for (var j = 1; j < 2; j++) {
             var scaledOuterRadius = tabOut;
+            if(starInfo.planets[i].pl_bmasse != "")
             if (maxOrbPer != -1) scaledOuterRadius = massScale(starInfo.planets[i].pl_bmasse);
             var arc = d3.arc()
             .innerRadius(outerRad - tabIn)
@@ -315,9 +345,30 @@ function drawExpandedPie(starInfo, name, target) {
             .text(tabText);
         }
     }
-    tabTypes.types.forEach(function (d, i) {
-        drawLegend(d, i, vis);
-    });
+    if(legendDrawn == 0){
+      tabTypes.types.forEach(function (d, i) {
+          drawLegend(d, i, vis);
+      });
+      legendDrawn = 1;
+    }
+
+    vis.selectAll("#pieStarSelectedMiddle")
+      .on("click", function(d,i){
+        pieCount[expandedStar.index] = 0;
+        var selectedStarName = expandedStar.name;
+        delete selectedStars[selectedStarName];
+        deletePieSelected();
+
+        vis.selectAll("#pieStarUnselected").remove();
+        vis.selectAll("#pieStarUnselectedText").remove();
+
+        for(var key in selectedStars){
+          drawUnexpandedPie(selectedStars[key].data, selectedStars[key].name, App.starPlanet.svg, selectedStars[key].index, 0);
+        }
+
+        removeCircle(selectedStarName);
+      });
+
 }
 
 function drawLegend(d, i, svg) {
@@ -332,6 +383,7 @@ function drawLegend(d, i, svg) {
 
 function deletePieSelected() {
     App.starPlanet.svg.selectAll("#pieStarSelected").remove();
+    App.starPlanet.svg.selectAll("#pieStarSelectedMiddle").remove();
 }
 
 function selectPieStar(element) {
@@ -340,4 +392,54 @@ function selectPieStar(element) {
     var info = App.exoplanetData[name];
     deletePieSelected();
     drawExpandedPie(info, name, App.starPlanet.svg);
+}
+
+var pieCount = [0,0,0,0,0,0,0,0,0];
+var expandedStar;
+var selectedStars = {};
+
+function updateCascadingPie(name, exoplanetD, removeFlag){
+    if(expandedStar != null && expandedStar.name == name)
+      return;
+
+    if(selectedStars[name] != null){
+        return;
+    }
+    else{
+      var i = 0;
+      for(i = 0; i < 8; i++){
+        if(pieCount[i] == 0){
+          pieCount[i] = 1;
+          break;
+        }
+      }
+
+      if(i == 8){
+        alert("Only 8 stars can be selected at a time. Delete a star by clicking on the star when it is expanded.");
+        return;
+      }
+
+      selectedStars[name] = {
+        name: name,
+        data: exoplanetD,
+        index: i
+      };
+
+      if(expandedStar == null){
+        expandedStar = selectedStars[name];
+        drawExpandedPie(expandedStar.data, expandedStar.name, App.starPlanet.svg);
+        drawUnexpandedPie(expandedStar.data, expandedStar.name, App.starPlanet.svg, expandedStar.index,1);
+        return;
+      }
+      else{
+        deletePieSelected();
+        //drawUnexpandedPie(expandedStar.data, expandedStar.name, App.starPlanet.svg, expandedStar.index);
+        expandedStar = selectedStars[name];
+        drawExpandedPie(expandedStar.data, expandedStar.name, App.starPlanet.svg);
+        drawUnexpandedPie(expandedStar.data, expandedStar.name, App.starPlanet.svg, expandedStar.index,1);
+        return;
+      }
+    }
+    /*drawExpandedPie(App.exoplanetData["BD-06 1339"], "BD-06 1339", App.starPlanet.svg);
+    drawUnexpandedPie(App.exoplanetData["55 Cnc"], "55 Cnc", App.starPlanet.svg, 0);*/
 }
