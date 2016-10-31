@@ -8,6 +8,8 @@ var tabTypes = {
 
 var legendDrawn = 0;
 
+var planetsSelected = {};
+
 function drawUnexpandedPie(starInfo, name, target, position, expandFlag) {
     var vis;
 
@@ -56,36 +58,49 @@ function drawUnexpandedPie(starInfo, name, target, position, expandFlag) {
     .attr("fill", "rgb(255,105,97)")
             .attr("transform", "translate(" + (unexpandedPieCenter.x) + ", " + (unexpandedPieCenter.y) + ")");*/
 
+    var cutName = name.substring(0, 10);
+
     if(expandFlag == 0){
       vis
       .append("path")
       .attr("d", center).attr("data-star", name).attr("id", "pieStarUnselected")//.attr("onclick", "selectPieStar(this)")
       .attr("fill", "rgb(255,105,97)")
               .attr("transform", "translate(" + (unexpandedPieCenter.x) + ", " + (unexpandedPieCenter.y) + ")");
+
+      vis
+      .append("text").attr("data-star", name).attr("id", "pieStarUnselectedText")//.attr("onclick", "selectPieStar(this)")
+      .attr("transform", "translate(" + (unexpandedPieCenter.x) + ", " + (5 + unexpandedPieCenter.y) + ")")
+      .style("text-anchor", "middle")
+      .text(cutName);
     }
     else{
-      vis.selectAll("#pieStarUnselected").attr("fill", "rgb(255,105,97)");
+      vis.selectAll("#pieStarUnselected").transition().duration(400).attr("fill", "rgb(255,105,97)");
 
       vis
       .append("path")
       .attr("d", center).attr("data-star", name).attr("id", "pieStarUnselected")//.attr("onclick", "selectPieStar(this)")
-      .attr("fill", "grey")
-              .attr("transform", "translate(" + (unexpandedPieCenter.x) + ", " + (unexpandedPieCenter.y) + ")");
-    }
-    var cutName = name.substring(0, 10);
+      .attr("fill", "rgb(19,123,128)").attr("opacity",0)
+              .attr("transform", "translate(" + (unexpandedPieCenter.x) + ", " + (unexpandedPieCenter.y) + ")")
+              .transition().duration(400)
+              .attr("opacity", 1);
 
-    vis
-.append("text").attr("data-star", name).attr("id", "pieStarUnselectedText")//.attr("onclick", "selectPieStar(this)")
-.attr("transform", "translate(" + (unexpandedPieCenter.x) + ", " + (5 + unexpandedPieCenter.y) + ")")
-.style("text-anchor", "middle")
-.text(cutName);
+      vis
+      .append("text").attr("data-star", name).attr("id", "pieStarUnselectedText")//.attr("onclick", "selectPieStar(this)")
+      .attr("transform", "translate(" + (unexpandedPieCenter.x) + ", " + (5 + unexpandedPieCenter.y) + ")")
+      .style("text-anchor", "middle")
+      .text(cutName).attr("opacity", 0)
+      .transition().duration(400)
+      .attr("opacity", 1);
+    }
+
+
 
     vis.selectAll("#pieStarUnselected")
       .on("click", function(d,i){
         selectPieStar(this);
-        vis.selectAll("#pieStarUnselected").attr("fill", "rgb(255,105,97)");
-        d3.select(this)
-          .attr("fill", "grey");
+        vis.selectAll("#pieStarUnselected").transition().duration(400).attr("fill", "rgb(255,105,97)");
+        d3.select(this).transition().duration(400)
+          .attr("fill", "rgb(19,123,128)");
         expandedStar = selectedStars[this.getAttribute("data-star")];
       })
 }
@@ -128,12 +143,21 @@ function drawExpandedPie(starInfo, name, target) {
         .startAngle((i * 360 / length + padding) * (pi / 180)) //converting from degs to radians
         .endAngle(((i + 1) * 360 / length - padding) * (pi / 180)) //just radians
 
+        console.log(planetsSelected);
+        if(App.exoplanetData[name].planets[i].pl_name in planetsSelected){
         vis
         .append("path")
         .attr("d", arc)
-        .attr("fill", "rgb(253,253,150)").attr("data-star", name).attr("id", "pieStarSelected")
+        .attr("fill", "rgb(104,139,171)").attr("data-star", name).attr("id", "pieStarSelectedPlanets").attr("planet-index", i)
                     .attr("transform", "translate(" + (pieCenter.x) + ", " + (pieCenter.y) + ")");
-
+        }
+        else{
+          vis
+          .append("path")
+          .attr("d", arc)
+          .attr("fill", "rgb(253,253,150)").attr("data-star", name).attr("id", "pieStarSelectedPlanets").attr("planet-index", i)
+                      .attr("transform", "translate(" + (pieCenter.x) + ", " + (pieCenter.y) + ")");
+        }
 
     }
     for (var i = 0; i < length; i++) {
@@ -253,21 +277,25 @@ function drawExpandedPie(starInfo, name, target) {
 
             var angle = arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180) - pi / 2 + bisectRange;
 
-            var transX1 = (pieCenter.x + ((outerRad - tabIn) * Math.cos(angle)))
-            var transY1 = (pieCenter.y + ((outerRad - tabIn) * Math.sin(angle)))
+            var transX1 = (pieCenter.x + ((outerRad - 0) * Math.cos(angle)))
+            var transY1 = (pieCenter.y + ((outerRad - 0) * Math.sin(angle)))
             var transX2 = (pieCenter.x + ((outerRad + tabOut) * Math.cos(angle)))
             var transY2 = (pieCenter.y + ((outerRad + tabOut) * Math.sin(angle)))
+            //var transX2 = (pieCenter.x + ((outerRad + scaledOuterRadius) * Math.cos(angle)))
+            //var transY2 = (pieCenter.y + ((outerRad + scaledOuterRadius) * Math.sin(angle)))
+            //var transX2 = (pieCenter.x + ((outerRad) * Math.cos(angle)))
+           // var transY2 = (pieCenter.y + ((outerRad) * Math.sin(angle)))
 
             if ((angle * (180 / pi)) % 360 > 270 || (angle * (180 / pi)) % 360 <= 90)
                 vis
             .append("text").attr("data-star", name).attr("id", "pieStarSelected")
-            .attr("transform", "translate(" + transX1 + "," + transY1 + ") rotate(" + (angle * (180 / pi)) + ")")
-            .text(tabText);
+            .attr("transform", "translate(" + transX1 + "," + transY1 + ") rotate(" + (angle * (180 / pi))  + ")")
+            .text(tabText).attr("fill", "rgb(255,20,147)").style("font-weight", "900");
             else
                 vis
             .append("text").attr("data-star", name).attr("id", "pieStarSelected")
             .attr("transform", "translate(" + transX2 + "," + transY2 + ") rotate(" + (angle * (180 / pi) + 180) + ")")
-            .text(tabText);
+            .text(tabText).attr("fill", "rgb(255,20,147)").style("font-weight","900");
         }
         for (var j = 1; j < 2; j++) {
             var scaledOuterRadius = tabOut;
@@ -291,8 +319,8 @@ function drawExpandedPie(starInfo, name, target) {
 
             var angle = arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180) - pi / 2 + bisectRange;
 
-            var transX1 = (pieCenter.x + ((outerRad - tabIn) * Math.cos(angle)))
-            var transY1 = (pieCenter.y + ((outerRad - tabIn) * Math.sin(angle)))
+            var transX1 = (pieCenter.x + ((outerRad - 0) * Math.cos(angle)))
+            var transY1 = (pieCenter.y + ((outerRad - 0) * Math.sin(angle)))
             var transX2 = (pieCenter.x + ((outerRad + tabOut) * Math.cos(angle)))
             var transY2 = (pieCenter.y + ((outerRad + tabOut) * Math.sin(angle)))
 
@@ -300,12 +328,12 @@ function drawExpandedPie(starInfo, name, target) {
                 vis
             .append("text").attr("data-star", name).attr("id", "pieStarSelected")
             .attr("transform", "translate(" + transX1 + "," + transY1 + ") rotate(" + (angle * (180 / pi)) + ")")
-            .text(tabText);
+            .text(tabText).attr("fill", "rgb(255,20,147)").style("font-weight", "900");
             else
                 vis
             .append("text").attr("data-star", name).attr("id", "pieStarSelected")
             .attr("transform", "translate(" + transX2 + "," + transY2 + ") rotate(" + (angle * (180 / pi) + 180) + ")")
-            .text(tabText);
+            .text(tabText).attr("fill", "rgb(255,20,147)").style("font-weight", "900");
         }
         for (var j = 2; j < 3; j++) {
             var scaledOuterRadius = tabOut;
@@ -328,8 +356,10 @@ function drawExpandedPie(starInfo, name, target) {
 
             var angle = arcRangeStart + (j * trisectRange + nestPadding) * (pi / 180) - pi / 2 + bisectRange;
 
-            var transX1 = (pieCenter.x + ((outerRad - tabIn) * Math.cos(angle)))
-            var transY1 = (pieCenter.y + ((outerRad - tabIn) * Math.sin(angle)))
+            //var transX1 = (pieCenter.x + ((outerRad - tabIn) * Math.cos(angle)))
+            //var transY1 = (pieCenter.y + ((outerRad - tabIn) * Math.sin(angle)))
+            var transX1 = (pieCenter.x + ((outerRad - 0) * Math.cos(angle)))
+            var transY1 = (pieCenter.y + ((outerRad - 0) * Math.sin(angle)))
             var transX2 = (pieCenter.x + ((outerRad + tabOut) * Math.cos(angle)))
             var transY2 = (pieCenter.y + ((outerRad + tabOut) * Math.sin(angle)))
 
@@ -337,12 +367,12 @@ function drawExpandedPie(starInfo, name, target) {
                 vis
             .append("text").attr("data-star", name).attr("id", "pieStarSelected")
             .attr("transform", "translate(" + transX1 + "," + transY1 + ") rotate(" + (angle * (180 / pi)) + ")")
-            .text(tabText);
+            .text(tabText).attr("fill", "rgb(255,20,147)").style("font-weight", "900");
             else
                 vis
             .append("text").attr("data-star", name).attr("id", "pieStarSelected")
             .attr("transform", "translate(" + transX2 + "," + transY2 + ") rotate(" + (angle * (180 / pi) + 180) + ")")
-            .text(tabText);
+            .text(tabText).attr("fill", "rgb(255,20,147)").style("font-weight", "900");
         }
     }
     if(legendDrawn == 0){
@@ -352,6 +382,8 @@ function drawExpandedPie(starInfo, name, target) {
       legendDrawn = 1;
     }
 
+
+//remove star...
     vis.selectAll("#pieStarSelectedMiddle")
       .on("click", function(d,i){
         pieCount[expandedStar.index] = 0;
@@ -369,6 +401,32 @@ function drawExpandedPie(starInfo, name, target) {
         removeCircle(selectedStarName);
       });
 
+
+    vis.selectAll("#pieStarSelectedPlanets")
+      .on("click", function(d,i){
+        var name = this.getAttribute("data-star");
+        var index = this.getAttribute("planet-index");
+        var color = this.getAttribute("fill");
+        var planets = App.exoplanetData[name].planets[index];
+        console.log(planets);
+        console.log(i);
+        console.log(color);
+
+        if(color == "rgb(253,253,150)" || color == "rgb(253, 253, 150)"){
+          d3.select(this).transition().duration(750)
+            .attr("fill", "rgb(104,139,171)");
+            //add planet to exoplanet comparison
+            planetsSelected[planets.pl_name] = {
+              name: planets.pl_name
+            };
+        }
+        else{
+          d3.select(this).transition().duration(750)
+            .attr("fill", "rgb(253,253,150)");
+            delete planetsSelected[planets.pl_name];
+            //remove planet from exoplanet comparison
+        }
+      });
 }
 
 function drawLegend(d, i, svg) {
@@ -384,6 +442,7 @@ function drawLegend(d, i, svg) {
 function deletePieSelected() {
     App.starPlanet.svg.selectAll("#pieStarSelected").remove();
     App.starPlanet.svg.selectAll("#pieStarSelectedMiddle").remove();
+    App.starPlanet.svg.selectAll("#pieStarSelectedPlanets").remove();
 }
 
 function selectPieStar(element) {

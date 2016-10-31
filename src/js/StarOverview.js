@@ -98,7 +98,7 @@ function drawStars() {
 				console.log("selectCount: " + selectCount);
 				if(selectCount < 8 && selectCount >= 0){
 					updateStarComparison(starIDs[i], d);
-					selectCount++;
+					selectCount = starComparisonArr.length;
 				}
 
 				/*drawExpandedPie(App.exoplanetData["BD-06 1339"], "BD-06 1339", App.starPlanet.svg);

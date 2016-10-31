@@ -686,7 +686,7 @@ function removeCircle(starName){
       .style("fill", scatterColors[toggleValue]);
 
   updateStarComparison(null,null);
-  selectCount--;
+  selectCount = starComparisonArr.length;
   /*panel.svg.selectAll("#circleG")
       .on("mouseover", function(d,i){
           var numobjectHovered = i;
