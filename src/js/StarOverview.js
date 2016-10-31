@@ -25,7 +25,7 @@ function drawStars() {
 		.domain(d3.extent(starIDs, (d) => {
 			return +App.exoplanetData[d]["st_mass"];
 		}))
-		.range([1, 4]);
+		.range([2, 6]);
 
 	// used to zoom/pan
 	var zoomGroup = panel.svg.append("g")
@@ -43,8 +43,14 @@ function drawStars() {
 		var x = d3.event.transform.x;
 		var y = d3.event.transform.y;
 
-		App.updateThumb((panel.width / 2) - x,
-			(panel.height / 2) - y,
+		console.log({
+			k: scale,
+			x: x,
+			y: y
+		});
+
+		App.updateThumb(panel.width - (x / scale),
+			panel.height - (y / scale),
 			scale);
 
 		d3.select(".sun")
@@ -109,4 +115,16 @@ function drawStars() {
 				//drawPie(App.exoplanetData[starIDs[i]], starIDs[i], App.starPlanet.svg);
 		});
 
+}
+
+function filterPlanets(option) {
+	var value = +option.value;
+
+	App.starOverview.svg.selectAll(".starPoint")
+		.style("opacity", (d) => {
+			return d.planets.length >= value ? 1 : 0.1;
+		})
+		.style("pointer-events", (d) => {
+			return d.planets.length >= value ? "initial" : "none";
+		});
 }

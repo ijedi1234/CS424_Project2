@@ -30,7 +30,22 @@
 				<div class="inner" id="starOverview">
 
 				</div>
+				<div id="planetFilter">
+					<p style="color:white;text-align:center;margin-top:5px">
+						Filter by<br># Planets:
+					</p>
+					<select id="planetFilterSelect" onchange="filterPlanets(this)">
+					  <option value="1">1+</option>
+					  <option value="2">2+</option>
+					  <option value="3">3+</option>
+					  <option value="4">4+</option>
+					  <option value="5">5+</option>
+					</select>
+				</div>
 				<div id="smallMap">
+					<div id="starCircleBoundary">
+
+					</div>
 					<div id="smallMapLoc">
 
 					</div>

@@ -31,8 +31,8 @@ var App = App || {};
 		var heightRatio = smallBoxHeight/App.starOverview.height;
 
 		d3.select("#smallMapLoc")
-			.style("top", (y * heightRatio) + "px")
-			.style("left", (x * widthRatio) + "px")
+			.style("top", ((y * heightRatio) - (smallBoxHeight/2)) + "px")
+			.style("left", ((x * widthRatio) - (smallBoxWidth/2)) + "px")
 			.style("width", (smallBoxWidth / scale) + "px")
 			.style("height", (smallBoxHeight / scale) + "px");
 
@@ -112,7 +112,7 @@ var App = App || {};
 		setupDivs();
     //drawPie(App.exoplanetData["BD-06 1339"], "BD-06 1339", App.starPlanet.svg);
 
-		App.updateThumb(0, 0, 1);
+		App.updateThumb(App.starOverview.width / 2, App.starOverview.height / 2, 1);
 		drawStars();
 
     drawStarComparison();
