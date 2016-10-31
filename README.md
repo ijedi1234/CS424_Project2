@@ -47,16 +47,16 @@ on stars close to home than those very far away.
 Our second technique is a scatter plot. This easily shows differences between certain star attributes and provides a button to toggle between attributes. This is better than or as good as other approaches
 due to the intuition of knowing how to compare between two values plotted on the scatter plot.
 
-The third technique, known as the Cascaded Pietree, is an implementation of one of the trees described in "A generative layout approach for rooted tree drawings" by Hans-Jörg Schulz, Zabedul Akbar and Frank Maurer.
+The third technique, known as the Cascaded Pietree, is an implementation of one of the trees described in "A generative layout approach for rooted tree drawings" by Hans-Jï¿½rg Schulz, Zabedul Akbar and Frank Maurer.
 Since there are so few planets per star, and the depth of the tree is very low (top level being the star, next being the exoplanet names, and the last being the exoplanet attributes), this is best at showing
-a concise presentation of exoplanet data. Note, again, that the exoplanet data most likely to have a non-empty value is used for the exoplanet attribute data. 
+a concise presentation of exoplanet data. Note, again, that the exoplanet data most likely to have a non-empty value is used for the exoplanet attribute data.
 
 # Paper citation
 
-Schulz, Hans-Jörg, Zabedul Akbar, and Frank Maurer. "A generative layout approach for rooted tree drawings." 2013 IEEE Pacific Visualization Symposium (PacificVis). IEEE, 2013.
+Schulz, Hans-Jï¿½rg, Zabedul Akbar, and Frank Maurer. "A generative layout approach for rooted tree drawings." 2013 IEEE Pacific Visualization Symposium (PacificVis). IEEE, 2013.
 
 # Team member responsibilities
 
-Andy: Create dashboard framework and star field visualiation. Also assist with readme.
+Andy: Create dashboard framework, star field visualization, and planet comparison PCP. Also assist with readme.
 Patrick: Create scatter plot visualization and assist with transition implementation.
 Louis: Create Cascaded Pietree visualization. Also assist with readme.
