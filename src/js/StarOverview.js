@@ -43,12 +43,6 @@ function drawStars() {
 		var x = d3.event.transform.x;
 		var y = d3.event.transform.y;
 
-		console.log({
-			k: scale,
-			x: x,
-			y: y
-		});
-
 		App.updateThumb(panel.width - (x / scale),
 			panel.height - (y / scale),
 			scale);
@@ -104,6 +98,17 @@ function drawStars() {
 				console.log("selectCount: " + selectCount);
 				if(selectCount < 8 && selectCount >= 0){
 					updateStarComparison(starIDs[i], d);
+
+					var planets = [];
+
+					starComparisonArr.forEach(el => {
+						App.exoplanetData[el].planets.forEach(p => {
+							planets.push(p);
+						});
+					});
+
+					drawPlanetCompare(planets);
+
 					selectCount = starComparisonArr.length;
 				}
 

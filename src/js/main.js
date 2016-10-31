@@ -73,17 +73,29 @@ var App = App || {};
 
         let planet = {};
 
-        App.planetVariables.forEach(el => {
-          planet[el] = d[el];
-        });
+        // App.planetVariables.forEach(el => {
+        //   planet[el] = parseInt(d[el]) ?  Number(d[el]) : d[el];
+        // });
+
+				Object.keys(d).forEach((el) => {
+					if(el.substring(0, 2) === "pl") {
+						planet[el] = parseInt(d[el]) ?  Number(d[el]) : d[el];
+					}
+				})
 
         if (!data[starName]) {
           // if the star is not already in the list for a planet
           let star = {};
 
-          App.starVariables.forEach(el => {
-            star[el] = d[el];
-          });
+          // App.starVariables.forEach(el => {
+          //   star[el] = parseInt(d[el]) ?  Number(d[el]) : d[el];;
+          // });
+
+					Object.keys(d).forEach((el) => {
+						if(el.substring(0, 2) === "st") {
+							star[el] = parseInt(d[el]) ?  Number(d[el]) : d[el];
+						}
+					})
 
           star.planets = [];
 
@@ -117,6 +129,18 @@ var App = App || {};
 
     drawStarComparison();
 
+		// initialize pcp with random planets
+		var randPlanets = [];
+		for(var i = 0; i < 10; i++) {
+			var ind = Math.floor(Math.random() * Object.keys(App.exoplanetData).length);
+			var key = Object.keys(App.exoplanetData)[ind];
+
+			App.exoplanetData[key].planets.forEach(p => {
+				randPlanets.push(p);
+			});
+		}
+		drawPlanetCompare(randPlanets);
+
   }
 
 	function setupDivs() {
@@ -136,11 +160,11 @@ var App = App || {};
 			.attr("width", width)
 			.attr("height", height);
 
-		App.starOverview = {
-			svg: item,
-			width: width,
-			height: height
-		};
+		App.starOverview = App.starOverview || {};
+
+		App.starOverview.svg = item;
+		App.starOverview.width = width;
+		App.starOverview.height =  height;
 
 		App.starOverview.svg.append("rect")
 			.attr("width", "100%")
@@ -161,11 +185,11 @@ var App = App || {};
 			.attr("width", width)
 			.attr("height", height);
 
-		App.starInfo = {
-			svg: item,
-			width: width,
-			height: height
-		};
+		App.starInfo = App.starInfo || {};
+
+		App.starInfo.svg = item;
+		App.starInfo.width = width;
+		App.starInfo.height = height;
 
 		App.starInfo.svg.append("rect")
 			.attr("width", "100%")
@@ -182,11 +206,11 @@ var App = App || {};
 			.attr("width", width)
 			.attr("height", height);
 
-		App.starPlanet = {
-			svg: item,
-			width: width,
-			height: height
-		};
+		App.starPlanet = App.starPlanet || {};
+
+		App.starPlanet.svg = item;
+		App.starPlanet.width = width;
+		App.starPlanet.height = height;
 
 		App.starPlanet.svg.append("rect")
 			.attr("width", "100%")
@@ -203,16 +227,26 @@ var App = App || {};
 			.attr("width", width)
 			.attr("height", height);
 
-		App.planetInfo = {
-			svg: item,
-			width: width,
-			height: height
-		};
+		App.planetInfo = App.planetInfo || {};
+
+		App.planetInfo.svg = item;
+		App.planetInfo.width = width;
+		App.planetInfo.height = height;
 
 		App.planetInfo.svg.append("rect")
 			.attr("width", "100%")
 			.attr("height", "100%")
-			.style("fill", "#2b4a7c");
+			.style("fill", "#AAAAAA");
+
+		// add title
+		App.planetInfo.svg.append("text")
+			.text("Planet Comparison")
+			.style("text-anchor", "middle")
+			.attr("x", "50%")
+			.attr("y", 40)
+			.style("font-size", 20)
+			.style("font-weight", "bold")
+			.style("fill", "black");
 
 		console.log(App);
 	}

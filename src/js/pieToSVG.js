@@ -399,6 +399,15 @@ function drawExpandedPie(starInfo, name, target) {
         }
 
         removeCircle(selectedStarName);
+
+				// update parallel coordinate plots
+				var planets = [];
+				starComparisonArr.forEach(el => {
+					App.exoplanetData[el].planets.forEach(p => {
+						planets.push(p);
+					});
+				});
+				drawPlanetCompare(planets);
       });
 
 
