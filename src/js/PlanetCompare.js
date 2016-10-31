@@ -18,6 +18,11 @@ var App = App || {};
 				type: "ordinal"
 			},
 			{
+				name: "pl_letter",
+				label: "Planet Letter",
+				type: "ordinal"
+			},
+			{
 				name: "pl_orbper",
 				label: "Orbital Period",
 				type: "linear"
@@ -39,7 +44,7 @@ var App = App || {};
 			},
 			{
 				name: "pl_dens",
-				label: "Density (g/cm^3)",
+				label: "Density",
 				type: "linear"
 			},
 			{
