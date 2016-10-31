@@ -532,7 +532,6 @@ function updateStarComparison(starName, starData){
 
 
 //add new scatterplot circle with a new g
-//HERE LOUIS
   panel.svg.selectAll("#circleG")
     .data(data)
     .enter().append("g")

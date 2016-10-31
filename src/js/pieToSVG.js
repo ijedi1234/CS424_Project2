@@ -421,7 +421,7 @@ function drawExpandedPie(starInfo, name, target) {
         console.log(i);
         console.log(color);
 
-        if(color == "rgb(253,253,150)" || color == "rgb(253, 253, 150)"){
+       /* if(color == "rgb(253,253,150)" || color == "rgb(253, 253, 150)"){
           d3.select(this).transition().duration(750)
             .attr("fill", "rgb(104,139,171)");
             //add planet to exoplanet comparison
@@ -434,7 +434,7 @@ function drawExpandedPie(starInfo, name, target) {
             .attr("fill", "rgb(253,253,150)");
             delete planetsSelected[planets.pl_name];
             //remove planet from exoplanet comparison
-        }
+        }*/
       });
 }
 
