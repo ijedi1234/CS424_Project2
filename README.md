@@ -1,4 +1,4 @@
-
+﻿
 # CS424_Project2
 
 
@@ -58,5 +58,5 @@ Schulz, Hans-J�rg, Zabedul Akbar, and Frank Maurer. "A generative layout appro
 # Team member responsibilities
 
 Andy: Create dashboard framework, star field visualization, and planet comparison PCP. Also assist with readme.
-Patrick: Create scatter plot visualization and assist with transition implementation.
+Patrick: Create scatter plot visualization and assist with transition implementation. Also helped with linking the various interactions between visualizations.
 Louis: Create Cascaded Pietree visualization. Also assist with readme.
