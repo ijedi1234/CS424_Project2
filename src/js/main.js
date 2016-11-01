@@ -79,7 +79,7 @@ var App = App || {};
 
 				Object.keys(d).forEach((el) => {
 					if(el.substring(0, 2) === "pl") {
-						planet[el] = parseInt(d[el]) ?  Number(d[el]) : d[el];
+						planet[el] = Number(d[el]) ?  Number(d[el]) : d[el];
 					}
 				})
 
@@ -93,7 +93,7 @@ var App = App || {};
 
 					Object.keys(d).forEach((el) => {
 						if(el.substring(0, 2) === "st") {
-							star[el] = parseInt(d[el]) ?  Number(d[el]) : d[el];
+							star[el] = Number(d[el]) ?  Number(d[el]) : d[el];
 						}
 					})
 
