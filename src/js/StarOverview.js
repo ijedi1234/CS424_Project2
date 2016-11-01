@@ -10,7 +10,7 @@ function drawStars() {
 	var numStars = starIDs.length;
 
 	starIDs = starIDs.filter((d) => {
-		return App.exoplanetData[d]["st_dist"] && +App.exoplanetData[d]["st_dist"] < 2757.8792493946735;
+		return App.exoplanetData[d]["st_dist"] && App.exoplanetData[d]["st_mass"] && +App.exoplanetData[d]["st_dist"] < 2757.8792493946735;
 	});
 
 	// use "st_dist" to display stars
