@@ -19,12 +19,12 @@ var App = App || {};
 			},
 			{
 				name: "pl_orbper",
-				label: "Orbital Period (Days)",
+				label: "Orb Per: days",
 				type: "linear"
 			},
 			{
 				name: "pl_rade",
-				label: "Radius (Earths)",
+				label: "Radius: Earths",
 				type: "linear"
 			},
 			{
@@ -34,12 +34,12 @@ var App = App || {};
 			},
 			{
 				name: "pl_orbincl",
-				label: "Inclination (Degrees)",
+				label: "Inclination: deg",
 				type: "linear"
 			},
 			{
 				name: "pl_dens",
-				label: "Density (g/cm**3)",
+				label: "Density: g/cm^3",
 				type: "linear"
 			},
 			{
