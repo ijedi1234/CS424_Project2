@@ -40,7 +40,13 @@ When was Chosen Star A's sole exoplanet discovered?
 
 How many times greater is Chosen Star A b's minimum mass than Chosen Star A c?
 
-[Images needed here]
+# Project Images
+
+![alt text](https://i.sli.mg/TpfUA6.jpg "Scatter Plot")
+
+![alt text](https://i.sli.mg/79ML2p.jpg "Star Field")
+
+![alt text](https://i.sli.mg/qN7xO1.jpg "Pietree and Nomogram")
 
 # Why Our Visualization Techniques Are Best:
 
@@ -56,7 +62,7 @@ The third technique, known as the Cascaded Pietree, is an implementation of one 
 Since there are so few planets per star, and the depth of the tree is very low (top level being the star, next being the exoplanet names, and the last being the exoplanet attributes), this is best at showing
 a concise presentation of exoplanet data. Note, again, that the exoplanet data most likely to have a non-empty value is used for the exoplanet attribute data.
 
-The fourth technique is a parallel coordinate plot mapping each star's exoplanets in the pie queue in the third visualziation with planet data. Data can be filtered easily by clicking and dragging on
+The fourth technique is a parallel coordinate plot (nomogram) mapping each star's exoplanets in the pie queue in the third visualziation with planet data. Data can be filtered easily by clicking and dragging on
 an axis to create a slider than only permits data that passes through it to be drawn to screen. This visualization helps remove the need to use many different colors for telling exoplanets apart,
  and the exoplanets for each star can be easily distinguished using the second axis listing planet names.
 
@@ -69,6 +75,30 @@ Therefore, the dataset used to get star information is effectively a flat table 
 due to the need of having a star and exoplanet key to get exoplanet information.
 
 # Task Abstraction of the Project
+
+Discover - A user can use the star field visualization to discover information on stars at various distances from the Sun.
+Annotate - Annotations (tooltips) appear in the scatter plot when a data item is hovered over.
+Record - At most 8 star systems can be recorded for the pietree visualziation at a time. These eight recorded star systems are also used by the other non-star field visualziations.
+Derive - The second network dataset is derived by the first tabular dataset. The network dataset is most notably used in the piretree visualziation.
+Lookup - A user can use the filter provided in the star field visualization to find star systems with a number of exoplanets greater or equal to the number in the filter.
+Compare - Using the parallel coordinate plot, a user can compare the exoplanets to one another. The scatter plot can also permit the user to compare star attribtues to each other.
+
+# Video Overview
+
+https://www.youtube.com/watch?v=352Rxy9I_O0&feature=youtu.be
+
+# Value to Domain Experts
+
+Our project can scope better than current analytics approaches. Consider, for example, the visualization provided by exoplanets.org: http://exoplanets.org/plots .
+
+There is no simple way to find all the exoplanet information for a single star, just a large mass of them, in the exoplanets.org plot. If such a utility does exist for their plot, it is not easily apparent.
+
+Our project, on the other hand, can provide various attributes for other solar systems, including star information and the data on their exoplanets without interference from other stars or exoplanets.
+
+This can be done by simply selecting a star of interest and viewing it and its exoplanets' properties.
+
+As another improvement, our project is also much more colorful and enticing than the exoplanet.org plot; where exoplanet.org is mostly filled with white, our project has a great multitude of colors, especially in the
+pietree visualization.
 
 # Paper citation
 
