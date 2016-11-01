@@ -100,7 +100,7 @@ function drawStars() {
 					updateStarComparison(starIDs[i], d);
 
 					var planets = [];
-					/*planets.push({ 
+					/*planets.push({
 					    pl_hostname: "null" ,
 					    pl_letter: "null",
 					    pl_orbper: "0",

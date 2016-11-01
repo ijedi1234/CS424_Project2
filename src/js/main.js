@@ -131,14 +131,14 @@ var App = App || {};
 
 		// initialize pcp with random planets
 		var randPlanets = [];
-		/*for(var i = 0; i < 10; i++) {
+		for(var i = 0; i < 10; i++) {
 			var ind = Math.floor(Math.random() * Object.keys(App.exoplanetData).length);
 			var key = Object.keys(App.exoplanetData)[ind];
 
 			App.exoplanetData[key].planets.forEach(p => {
 				randPlanets.push(p);
 			});
-		}*/
+		}
 		drawPlanetCompare(randPlanets);
 
   }
