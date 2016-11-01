@@ -100,6 +100,16 @@ function drawStars() {
 					updateStarComparison(starIDs[i], d);
 
 					var planets = [];
+					/*planets.push({ 
+					    pl_hostname: "null" ,
+					    pl_letter: "null",
+					    pl_orbper: "0",
+					    pl_rade: "0",
+					    pl_orbeccen: "0",
+					    pl_orbincl: "0",
+					    pl_dens: "0",
+					    pl_disc: "1960"
+					});*/
 
 					starComparisonArr.forEach(el => {
 						App.exoplanetData[el].planets.forEach(p => {

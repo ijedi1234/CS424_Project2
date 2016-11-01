@@ -18,13 +18,8 @@ var App = App || {};
 				type: "ordinal"
 			},
 			{
-				name: "pl_letter",
-				label: "Planet Letter",
-				type: "ordinal"
-			},
-			{
 				name: "pl_orbper",
-				label: "Orbital Period",
+				label: "Orbital Period (Days)",
 				type: "linear"
 			},
 			{
@@ -39,18 +34,23 @@ var App = App || {};
 			},
 			{
 				name: "pl_orbincl",
-				label: "Inclination",
+				label: "Inclination (Degrees)",
 				type: "linear"
 			},
 			{
 				name: "pl_dens",
-				label: "Density",
+				label: "Density (g/cm**3)",
 				type: "linear"
 			},
 			{
 				name: "pl_disc",
 				label: "Year Discovered",
 				type: "linear"
+			},
+			{
+			    name: "pl_letter",
+			    label: "Planet Letter",
+			    type: "ordinal"
 			}
 		],
 		"reduce")

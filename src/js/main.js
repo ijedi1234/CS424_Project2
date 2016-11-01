@@ -131,14 +131,14 @@ var App = App || {};
 
 		// initialize pcp with random planets
 		var randPlanets = [];
-		for(var i = 0; i < 10; i++) {
+		/*for(var i = 0; i < 10; i++) {
 			var ind = Math.floor(Math.random() * Object.keys(App.exoplanetData).length);
 			var key = Object.keys(App.exoplanetData)[ind];
 
 			App.exoplanetData[key].planets.forEach(p => {
 				randPlanets.push(p);
 			});
-		}
+		}*/
 		drawPlanetCompare(randPlanets);
 
   }
@@ -431,8 +431,8 @@ function updateStarComparison(starName, starData){
         .text("Parsecs");
     //if no entry is found, just set it to 0
     starComparisonData.forEach(function(d) {
-      if(!isNaN(parseInt(d["st_dist"])))
-          data.push(parseInt(d["st_dist"]))
+        if(!isNaN(parseFloat(d["st_dist"])))
+          data.push(parseFloat(d["st_dist"]))
       else
           data.push(0)}
     );
@@ -451,8 +451,8 @@ function updateStarComparison(starName, starData){
         .duration(750)
         .text("Solar Mass");
     starComparisonData.forEach(function(d) {
-      if(!isNaN(parseInt(d["st_mass"])))
-          data.push(parseInt(d["st_mass"]))
+      if(!isNaN(parseFloat(d["st_mass"])))
+          data.push(parseFloat(d["st_mass"]))
       else
           data.push(0)}
     );
@@ -470,8 +470,8 @@ function updateStarComparison(starName, starData){
         .duration(750)
         .text("Solar Radii");
     starComparisonData.forEach(function(d) {
-      if(!isNaN(parseInt(d["st_rad"])))
-          data.push(parseInt(d["st_rad"]))
+        if(!isNaN(parseFloat(d["st_rad"])))
+            data.push(parseFloat(d["st_rad"]))
       else
           data.push(0)}
     );
@@ -623,8 +623,8 @@ function removeCircle(starName){
         .text("Parsecs");
     //if no entry is found, just set it to 0
     starComparisonData.forEach(function(d) {
-      if(!isNaN(parseInt(d["st_dist"])))
-          data.push(parseInt(d["st_dist"]))
+        if(!isNaN(parseFloat(d["st_dist"])))
+            data.push(parseFloat(d["st_dist"]))
       else
           data.push(0)}
     );
@@ -643,8 +643,8 @@ function removeCircle(starName){
         .duration(750)
         .text("Solar Mass");
     starComparisonData.forEach(function(d) {
-      if(!isNaN(parseInt(d["st_mass"])))
-          data.push(parseInt(d["st_mass"]))
+        if(!isNaN(parseFloat(d["st_mass"])))
+            data.push(parseFloat(d["st_mass"]))
       else
           data.push(0)}
     );
@@ -662,8 +662,8 @@ function removeCircle(starName){
         .duration(750)
         .text("Solar Radii");
     starComparisonData.forEach(function(d) {
-      if(!isNaN(parseInt(d["st_rad"])))
-          data.push(parseInt(d["st_rad"]))
+        if(!isNaN(parseFloat(d["st_rad"])))
+            data.push(parseFloat(d["st_rad"]))
       else
           data.push(0)}
     );

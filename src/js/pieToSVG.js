@@ -401,7 +401,17 @@ function drawExpandedPie(starInfo, name, target) {
         removeCircle(selectedStarName);
 
 				// update parallel coordinate plots
-				var planets = [];
+        var planets = [];
+          /*planets.push({ 
+              pl_hostname: "null" ,
+              pl_letter: "null",
+              pl_orbper: "null",
+              pl_rade: "null",
+              pl_orbeccen: "null",
+              pl_orbincl: "null",
+              pl_dens: "null",
+              pl_disc: "null"
+          });*/
 				starComparisonArr.forEach(el => {
 					App.exoplanetData[el].planets.forEach(p => {
 						planets.push(p);

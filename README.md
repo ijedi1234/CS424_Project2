@@ -30,9 +30,14 @@ These were chosen because they are very likely to have data for any given exopla
 
 Example questions that can be answered by the visualization:
 
-Chosen at random, how many out of five stars with at least one exoplanet from the Sun have more than one exoplanet?
+Chosen at random, how many out of five stars with at least three exoplanets from the Sun have more than three exoplanets?
+
 How does Chosen Star A's mass compare to Chosen Star B's mass?
+
+How much farther from the Sun is Chosen Star A than Chosen Star B?
+
 When was Chosen Star A's sole exoplanet discovered?
+
 How many times greater is Chosen Star A b's minimum mass than Chosen Star A c?
 
 [Images needed here]
@@ -51,6 +56,20 @@ The third technique, known as the Cascaded Pietree, is an implementation of one 
 Since there are so few planets per star, and the depth of the tree is very low (top level being the star, next being the exoplanet names, and the last being the exoplanet attributes), this is best at showing
 a concise presentation of exoplanet data. Note, again, that the exoplanet data most likely to have a non-empty value is used for the exoplanet attribute data.
 
+The fourth technique is a parallel coordinate plot mapping each star's exoplanets in the pie queue in the third visualziation with planet data. Data can be filtered easily by clicking and dragging on
+an axis to create a slider than only permits data that passes through it to be drawn to screen. This visualization helps remove the need to use many different colors for telling exoplanets apart,
+ and the exoplanets for each star can be easily distinguished using the second axis listing planet names.
+
+# Data Abstraction of the Project
+
+Our table of exoplanets and their attributes is a flat table; the "key" for each row is the row value.
+The tabular dataset is sued to derive a network dataset containing a tree of stars conencted to their exoplanets.
+These two datasets are merged together to permit the use of a star name as a key to get information on the star and links to its exoplanets; the exoplanets have their own keys to be used with the solar system information.
+Therefore, the dataset used to get star information is effectively a flat table due to only needing the star key; the dataset used to get exoplanet information is effectively a multidimensional table 
+due to the need of having a star and exoplanet key to get exoplanet information.
+
+# Task Abstraction of the Project
+
 # Paper citation
 
 Schulz, Hans-J�rg, Zabedul Akbar, and Frank Maurer. "A generative layout approach for rooted tree drawings." 2013 IEEE Pacific Visualization Symposium (PacificVis). IEEE, 2013.
@@ -58,5 +77,7 @@ Schulz, Hans-J�rg, Zabedul Akbar, and Frank Maurer. "A generative layout appro
 # Team member responsibilities
 
 Andy: Create dashboard framework, star field visualization, and planet comparison PCP. Also assist with readme.
+
 Patrick: Create scatter plot visualization and assist with transition implementation. Also helped with linking the various interactions between visualizations.
+
 Louis: Create Cascaded Pietree visualization. Also assist with readme.
