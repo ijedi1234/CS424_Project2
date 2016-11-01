@@ -31,22 +31,22 @@ These were chosen because they are very likely to have data for any given exopla
 
 Example questions that can be answered by the visualization, along with the workflow to answer them:
 
-**Q:** Chosen at random, how many out of five stars with at least three exoplanets from the Sun have more than three exoplanets?
+**Q:** Chosen at random, how many out of five stars with at least three exoplanets from the Sun have more than three exoplanets?  
 **A:** Filter the stars in the Star Field to highlight stars with 3 or more planets, choose 5 stars, inspect the number of planets on each star using the Star-to-Planet Pietrees.
 
-**Q:** How does Chosen Star A's mass compare to Chosen Star B's mass?
+**Q:** How does Chosen Star A's mass compare to Chosen Star B's mass?  
 **A:** Select 2 stars, A and B, from the Star Field and inspect their mass in the Star Property Dot Chart.
 
-**Q:** How much farther from the Sun is Chosen Star A than Chosen Star B?
+**Q:** How much farther from the Sun is Chosen Star A than Chosen Star B?  
 **A:** Select 2 stars, A and B, from the Star Field and inspect their distance in the Star Property Dot Chart.
 
-**Q:** When was Chosen Star A's sole exoplanet discovered?
+**Q:** When was Chosen Star A's sole exoplanet discovered?  
 **A:** Use the Star-to-Planet Pietree to examine the Discovery Year of the exoplanet of Star A.
 
-**Q:** Given a Star A, How many times greater is exoplanet b's minimum mass than that of exoplanet c?
+**Q:** Given a Star A, How many times greater is exoplanet b's minimum mass than that of exoplanet c?  
 **A:** Using the Star-to-Planet Pietree, inspect the mass bar for each of the planets of the star.
 
-**Q:** Given a list of Stars chosen, which planets have similar properties?
+**Q:** Given a list of Stars chosen, which planets have similar properties?  
 **A:** Inspect the planets in the Planet Comparison PCP, brushing the axes to filter the planets down to a group with similar properties.
 
 # Project Images
@@ -82,12 +82,12 @@ due to the need of having a star and exoplanet key to get exoplanet information.
 
 # Task Abstraction of the Project
 
-**Discover** - A user can use the star field visualization to discover information on stars at various distances from the Sun.
-**Annotate** - Annotations (tooltips) appear in the dot chart when a data item is hovered over.
-**Record** - At most 8 star systems can be recorded for the pietree visualization at a time. These eight recorded star systems are also used by the other non-star field visualizations.
-**Derive** - The second network dataset is derived by the first tabular dataset. The network dataset is most notably used in the pietree visualization.
-**Lookup** - A user can use the filter provided in the star field visualization to find star systems with a number of exoplanets greater or equal to the number in the filter.
-**Compare** - Using the parallel coordinate plots, a user can compare the exoplanets to one another. The dot chart can also permit the user to compare star attributes to each other.
+**Discover** - A user can use the star field visualization to discover information on stars at various distances from the Sun.  
+**Annotate** - Annotations (tooltips) appear in the dot chart when a data item is hovered over.  
+**Record** - At most 8 star systems can be recorded for the pietree visualization at a time. These eight recorded star systems are also used by the other non-star field visualizations.  
+**Derive** - The second network dataset is derived by the first tabular dataset. The network dataset is most notably used in the pietree visualization.  
+**Lookup** - A user can use the filter provided in the star field visualization to find star systems with a number of exoplanets greater or equal to the number in the filter.  
+**Compare** - Using the parallel coordinate plots, a user can compare the exoplanets to one another. The dot chart can also permit the user to compare star attributes to each other.  
 
 # Video Overview
 
